@@ -1,0 +1,1 @@
+# sap.configurator.viewer.setup
