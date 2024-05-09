@@ -49,8 +49,8 @@ preview_image = "data/preview.png"
 name = "sap.configurator.viewer.setup"
 
 [settings]
-app.layout.name = "viewport_only"
-app.application_mode = "review"
+app.layout.name = "test_layout"
+app.application_mode = "layout"
 exts."omni.kit.viewport.menubar.camera".expand = true # Expand the extra-camera settings by default
 exts."omni.kit.window.file".useNewFilePicker = true
 exts."omni.kit.tool.asset_importer".useNewFilePicker = true
