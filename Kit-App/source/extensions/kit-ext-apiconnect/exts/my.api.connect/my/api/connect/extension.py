@@ -29,13 +29,11 @@ class APIWindowExample(ui.Window):
             try:
                 #make the request
                 async with session.get(url, params=params) as resp:
+                    print("HTTP response:", resp)
                     #get the response as json
                     result = await resp.json(content_type=None)
 
-                    #get the palette from the json
-                    data=result['results'][0]
-
-                    print(result)
+                    print("Net Weight:", result['NetWeight'])
             except Exception as e:
                 import carb
                 print(e)
@@ -70,6 +68,7 @@ class APIWindowExample(ui.Window):
     def __init__(self, title: str, **kwargs) -> None:
         super().__init__(title, **kwargs)
         self.frame.set_build_fn(self._build_fn)
+        
     def _build_fn(self):
         with self.frame:
             with ui.VStack(alignment=ui.Alignment.CENTER):

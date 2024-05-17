@@ -2,6 +2,8 @@ from omni.ui import scene as sc
 from omni.ui import color as cl
 import omni.ui as ui
 from pxr import Gf
+import asyncio
+import aiohttp
 
 
 class WidgetInfoManipulator(sc.Manipulator):
@@ -35,6 +37,7 @@ class WidgetInfoManipulator(sc.Manipulator):
                     ui.Spacer(width=5)
                 ui.Spacer(height=5)
         self.on_model_updated(None)
+        
 
     def on_build(self):
         """Called when the model is changed and rebuilds the whole slider"""
@@ -61,10 +64,12 @@ class WidgetInfoManipulator(sc.Manipulator):
         if self._name_label:
             stage = self.model.usd_context.get_stage()
             prim = stage.GetPrimAtPath(self.model.current_path)
-            attr_val = prim.GetAttribute("test_attr").Get()
-            # self._name_label.text = f"Attr: {attr_val}"
-
-            self._name_label.text = f"Prim:{self.model.get_item('name')}"
+            ID_val = prim.GetAttribute("ID_attr").Get()
+            run_loop = asyncio.get_event_loop()
+            run_loop.create_task(self.get_data_from_api(ID_val))
+            # http_resp = await self.get_data_from_api(ID_val)
+            # self._name_label.text = f"Net Weight: {http_resp['NetWeight']}"
+            # self._name_label.text = f"Prim:{self.model.get_item('name')}"
 
         # Update the slider
         def update_scale(prim_name, value):
@@ -80,3 +85,25 @@ class WidgetInfoManipulator(sc.Manipulator):
             self._slider_subscription = self._slider_model.subscribe_value_changed_fn(
                 lambda m, p=self.model.get_item("name"): update_scale(p, m.as_float)
             )
+
+    async def get_data_from_api(self, product):
+        async with aiohttp.ClientSession(auth=aiohttp.BasicAuth('CHIRITACR','1Cristian')) as session:
+        # with aiohttp.ClientSession(auth=aiohttp.BasicAuth('CHIRITACR','1Cristian')) as session:
+            params = {'sap-client' : 732}
+            url = f"https://ldcier8.wdf.sap.corp:44320/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0001/Product('{product}')"
+            print("URL:", url)
+            try:
+                #make the request
+                async with session.get(url, params=params) as resp:
+                # with session.get(url, params=params) as resp:
+                    print("HTTP response:", resp)
+                    #get the response as json
+                    result = await resp.json(content_type=None)
+
+                    print("Net Weight:", result)
+                    self._name_label.text = f"Net Weight: {result['NetWeight']}"
+                    # return result
+            except Exception as e:
+                import carb
+                print(e)
+                carb.log_info(f"Caught Exception {e}")
