@@ -114,13 +114,13 @@ class SetupExtension(omni.ext.IExt):
         # setup the Layout for your app
         self._layouts_path = carb.tokens.get_tokens_interface().resolve("${sap.configurator.viewer.setup}/layouts")
         # layout_file = Path(self._layouts_path).joinpath(f"{self._settings.get('/app/layout/name')}.json")
-        layout_file = str(Path(self._layouts_path) / "default.json")
+        layout_file = str(Path(self._layouts_path) / "test_layout_2.json")
         self.__setup_window_task = asyncio.ensure_future(_load_layout_startup(f"{layout_file}", True))
 
         self.review_layout_path = str(Path(self._layouts_path) / "comment_layout.json")
-        self.default_layout_path = str(Path(self._layouts_path) / "default.json")
+        self.default_layout_path = str(Path(self._layouts_path) / "test_layout_2.json")
         # self.layout_user_path = str(Path(self._layouts_path) / "layout_user.json")
-        self.layout_user_path = str(Path(self._layouts_path) / "default.json")
+        self.layout_user_path = str(Path(self._layouts_path) / "test_layout_2.json")
 
         # remove the user defined layout so that we always load the default layout when startup
         # if os.path.exists(self.layout_user_path):

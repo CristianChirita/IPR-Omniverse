@@ -14,6 +14,7 @@ repo_build.prebuild_copy {
 
 -- Apps: for each app generate batch files and a project based on kit files (e.g. my_name.my_app.kit)
 define_app("sap.configurator.viewer")
+define_experience("sap.configurator.viewer-nw", { config_path = "apps/sap.configurator.viewer.kit", extra_args = "--no-window" })
 
 -- App warmup script for the Launcher
 create_app_warmup_script("sap.configurator.viewer", {

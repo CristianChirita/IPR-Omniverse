@@ -1,6 +1,6 @@
 [package]
 title = "SAP Intelligent Product RTX Experience"
-version = "2024.1.0"
+version = "2024.1.1"
 description = "A custom app for configuration of large facilities such as factories, warehouses and more."
 
 # That makes it browsable in UI with "experience" filter
@@ -146,7 +146,7 @@ keywords = ["app", "usd", "explore", "configuration", "factory"]
 "omni.graph.action" = {}
 "omni.graph.bundle.action" = {}
 "omni.graph.window.action" = {}
- 
+
 # Extensions Manager only permitted for development
 "omni.kit.window.extensions" = {}
 
@@ -178,7 +178,7 @@ keywords = ["app", "usd", "explore", "configuration", "factory"]
 # "omni.kit.tagging" = {}
 "omni.kit.search.service" = {}
 
-# "omni.graph.ui" = {}
+"omni.graph.ui" = {}
 
 "usdrt.scenegraph" = {}
 
@@ -526,8 +526,9 @@ foundation.verifyOsVersion.enabled = false
 # load this stage URL when starting app (change URL to fit purpose)
 #content.emptyStageOnStart = true
 content.emptyStageOnStart = false
-app.auto_load_usd = "${sap.configurator.viewer.setup}/data/cube_sphere_cone.usda"
-#app.auto_load_usd = "omniverse://localhost/Projects/SAP/cube_sphere_cone.usda"
+app.auto_load_usd = "omniverse://localhost/Projects/Compressor Station Confidential/Kaeser/Collected_Munich_Plant_Variants/Munich_Plant_Variants_v3.usd"
+# app.auto_load_usd = "${sap.configurator.viewer.setup}/data/cube_sphere_cone.usda"
+# app.auto_load_usd = "omniverse://localhost/Projects/SAP/cube_sphere_cone.usda"
 
 app.livestream.allowResize = true
 
@@ -778,6 +779,7 @@ timeout = 600
 
 
 
+
 ########################################################################################################################
 # BEGIN GENERATED PART (Remove from 'BEGIN' to 'END' to regenerate)
 ########################################################################################################################
@@ -785,6 +787,7 @@ timeout = 600
 # Kit SDK Version: 105.1.2+release.134727.de96b556.tc
 
 # Exact Version dependencies:
+# 	omni.kit.streamsdk.plugins-2.6.2
 # 	omni.kit.window.modifier.titlebar-105.1.15
 # 	omni.scene.optimizer.core-105.1.15
 # 	omni.scene.optimizer.ui-105.1.9
@@ -792,6 +795,13 @@ timeout = 600
 # Version lock for all dependencies:
 [settings.app.exts]
 enabled = [
+	"omni.example.ui_scene.widget_info-1.0.1",
+	"omni.graph.ui",
+	"omni.graph.action",
+	"omni.graph.bundle.action",
+	"omni.graph.window.action",
+	"omni.graph.window.core",
+	"omni.graph.window.generic",
 	"omni.kit.asset_converter-2.0.19",
 	"omni.kit.browser.asset-1.3.7",
 	"omni.kit.browser.core-2.3.10",
@@ -802,6 +812,15 @@ enabled = [
 	"omni.kit.converter.cad_core-200.1.1-rc.10",
 	"omni.kit.converter.common-200.1.1-rc.4",
 	"omni.kit.converter.jt_core-200.1.1-rc.6",
+	"omni.kit.core.collection-0.1.6",
+	"omni.kit.graph.delegate.default-1.1.1",
+	"omni.kit.graph.delegate.modern-1.9.1",
+	"omni.kit.graph.editor.core-1.5.1",
+	"omni.kit.graph.usd.commands-1.3.0",
+	"omni.kit.graph.widget.variables-2.1.0",
+	"omni.kit.livestream.core-2.4.0",
+	"omni.kit.livestream.messaging-1.1.0",
+	"omni.kit.livestream.webrtc-2.3.2",
 	"omni.kit.markup.core-1.2.15",
 	"omni.kit.markup.playlist-0.0.4",
 	"omni.kit.ngsearch-0.3.3",
@@ -809,6 +828,7 @@ enabled = [
 	"omni.kit.prim.icon-1.0.12",
 	"omni.kit.search.service-0.1.12",
 	"omni.kit.stage_column.payload-1.0.13",
+	"omni.kit.stage_column.variant-1.0.13",
 	"omni.kit.thumbnails.usd-1.0.4",
 	"omni.kit.timeline.minibar-1.2.9",
 	"omni.kit.tool.asset_importer-2.5.1",
@@ -822,7 +842,8 @@ enabled = [
 	"omni.kit.usd_presenter.main.menubar-1.0.34",
 	"omni.kit.usd_presenter.render-0.1.1",
 	"omni.kit.usd_presenter.tooltip-0.2.1",
-	# "omni.kit.usd_presenter.window.welcome-0.1.49",
+	"omni.kit.variant.editor-105.1.7",
+	"omni.kit.variant.presenter-105.1.1",
 	"omni.kit.viewport.menubar.bottom-1.0.5",
 	"omni.kit.viewport.menubar.framerate-1.0.8",
 	"omni.kit.viewport.menubar.lighting-105.0.8",
@@ -852,20 +873,9 @@ enabled = [
 	"omni.usd.metrics.assembler-105.1.8",
 	"omni.usd.metrics.assembler.ui-105.1.19",
 	"omni.usd.schema.metrics.assembler-105.1.2",
-	"sap.configurator.viewer.setup-1.0.0",
 	"omni.warp.core-1.0.0-beta.3",
- 	# "omni.kit.debug.vscode",
-	"omni.kit.livestream.webrtc",
-	"omni.kit.livestream.messaging",
-	"omni.graph.action",
-	"omni.kit.quicklayout",
-	"omni.example.ui_scene.widget_info",
-	"omni.graph.bundle.action",
-	"omni.graph.window.action",
-	"omni.graph.window.generic",
-	"omni.kit.stage_column.variant",
-	"omni.kit.variant.editor",
-	"omni.kit.variant.presenter",
+	"sap.configurator.viewer.messaging-1.0.0",
+	"sap.configurator.viewer.setup-1.0.0",
 ]
 
 ########################################################################################################################
