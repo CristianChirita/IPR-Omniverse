@@ -67,9 +67,6 @@ class WidgetInfoManipulator(sc.Manipulator):
             ID_val = prim.GetAttribute("ID_attr").Get()
             run_loop = asyncio.get_event_loop()
             run_loop.create_task(self.get_data_from_api(ID_val))
-            # http_resp = await self.get_data_from_api(ID_val)
-            # self._name_label.text = f"Net Weight: {http_resp['NetWeight']}"
-            # self._name_label.text = f"Prim:{self.model.get_item('name')}"
 
         # Update the slider
         def update_scale(prim_name, value):
@@ -88,21 +85,14 @@ class WidgetInfoManipulator(sc.Manipulator):
 
     async def get_data_from_api(self, product):
         async with aiohttp.ClientSession(auth=aiohttp.BasicAuth('CHIRITACR','1Cristian')) as session:
-        # with aiohttp.ClientSession(auth=aiohttp.BasicAuth('CHIRITACR','1Cristian')) as session:
             params = {'sap-client' : 732}
             url = f"https://ldcier8.wdf.sap.corp:44320/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0001/Product('{product}')"
-            print("URL:", url)
             try:
                 #make the request
                 async with session.get(url, params=params) as resp:
-                # with session.get(url, params=params) as resp:
-                    print("HTTP response:", resp)
                     #get the response as json
                     result = await resp.json(content_type=None)
-
-                    print("Net Weight:", result)
                     self._name_label.text = f"Net Weight: {result['NetWeight']}"
-                    # return result
             except Exception as e:
                 import carb
                 print(e)
