@@ -25,17 +25,7 @@ class WidgetInfoManipulator(sc.Manipulator):
                 "border_radius": 4,
             })
             with ui.VStack():
-                self._name_label = ui.Label("", height=0, alignment=ui.Alignment.CENTER)
-                # setup some model, just for simple demonstration here
-                self._slider_model = ui.SimpleFloatModel()
-                ui.Spacer(height=5)
-                with ui.HStack():
-                    ui.Spacer(width=10)
-                    ui.Label("scale", height=0, width=0)
-                    ui.Spacer(width=5)
-                    ui.FloatSlider(self._slider_model)
-                    ui.Spacer(width=5)
-                ui.Spacer(height=5)
+                self._name_label = ui.Label("", height=50, style={"font_size": 35.0}, alignment=ui.Alignment.CENTER)
         self.on_model_updated(None)
         
 
@@ -46,7 +36,7 @@ class WidgetInfoManipulator(sc.Manipulator):
             with sc.Transform(scale_to=sc.Space.SCREEN):
                 with sc.Transform(transform=sc.Matrix44.get_translation_matrix(0, 100, 0)):
                     with sc.Transform(look_at=sc.Transform.LookAt.CAMERA):
-                        self._widget = sc.Widget(500, 150, update_policy=sc.Widget.UpdatePolicy.ALWAYS)
+                        self._widget = sc.Widget(500, 50, update_policy=sc.Widget.UpdatePolicy.ALWAYS)
                         self._widget.frame.set_build_fn(self.on_build_widgets)
 
     def on_model_updated(self, _):
@@ -67,21 +57,6 @@ class WidgetInfoManipulator(sc.Manipulator):
             ID_val = prim.GetAttribute("ID_attr").Get()
             run_loop = asyncio.get_event_loop()
             run_loop.create_task(self.get_data_from_api(ID_val))
-
-        # Update the slider
-        def update_scale(prim_name, value):
-            print(f"changing scale of {prim_name}, {value}")
-            stage = self.model.usd_context.get_stage()
-            prim = stage.GetPrimAtPath(self.model.current_path)
-            scale = prim.GetAttribute("xformOp:scale")
-            scale.Set(Gf.Vec3d(value, value, value))
-
-        if self._slider_model:
-            self._slider_subscription = None
-            self._slider_model.as_float = 1.0
-            self._slider_subscription = self._slider_model.subscribe_value_changed_fn(
-                lambda m, p=self.model.get_item("name"): update_scale(p, m.as_float)
-            )
 
     async def get_data_from_api(self, product):
         async with aiohttp.ClientSession(auth=aiohttp.BasicAuth('CHIRITACR','1Cristian')) as session:
