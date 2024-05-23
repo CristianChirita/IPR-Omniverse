@@ -14,10 +14,7 @@ class ViewportSceneInfo():
             self.scene_view = sc.SceneView()
 
             with self.scene_view.scene:
-                if display_widget:
-                    WidgetInfoManipulator(model=ObjInfoModel())                    
-                else:
-                    ObjInfoManipulator(model=ObjInfoModel())
+                WidgetInfoManipulator(model=ObjInfoModel())
 
             self.viewport_window.viewport_api.add_scene_view(self.scene_view)
 

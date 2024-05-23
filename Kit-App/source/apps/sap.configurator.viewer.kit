@@ -12,7 +12,6 @@ keywords = ["app", "usd", "explore", "configuration", "factory"]
 "omni.kit.renderer.core" = {}
 
 # Status Bar
-"omni.kit.window.status_bar" = {}
 "omni.activity.usd_resolver" = {}
 
 # This is your application setup Extensions
@@ -23,7 +22,7 @@ keywords = ["app", "usd", "explore", "configuration", "factory"]
 # Selection and Message Handling (custom)
 "sap.configurator.viewer.messaging" = {}
 
-"omni.example.ui_scene.widget_info" = {}
+"omni.example.ui_scene.widget_info" = { order = 11000 }
 
 # this is not strictly needed
 "omni.stats" = {}
@@ -246,8 +245,8 @@ excluded = [
 [settings.app]
 name = "SAP.Configurator"
 versionFile = "${app}/../VERSION"
-window.width = 4000
-window.height = 2500
+window.width = 2000
+window.height = 1200
 window.x = -1
 window.y = -1
 window.title = "SAP Intelligent Product RTX Experience"
@@ -795,7 +794,6 @@ timeout = 600
 # Version lock for all dependencies:
 [settings.app.exts]
 enabled = [
-	"omni.example.ui_scene.widget_info",
 	"omni.graph.ui",
 	"omni.graph.action",
 	"omni.graph.bundle.action",
@@ -876,6 +874,7 @@ enabled = [
 	"omni.warp.core-1.0.0-beta.3",
 	"sap.configurator.viewer.messaging-1.0.0",
 	"sap.configurator.viewer.setup-1.0.0",
+#	"omni.example.ui_scene.widget_info",
 ]
 
 ########################################################################################################################

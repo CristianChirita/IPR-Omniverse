@@ -17,6 +17,7 @@ import carb.settings
 import carb.tokens
 import omni.ext
 import omni.usd
+import asyncio
 
 import omni.kit.livestream.messaging as messaging
 
@@ -78,15 +79,27 @@ class Extension(omni.ext.IExt):
             sel.clear_selected_prim_paths()
             sel.set_selected_prim_paths([prim], True)
 
+    async def _disable_enable_widget_ext(self):
+        extmgr = omni.kit.app.get_app().get_extension_manager()
+        if extmgr:
+            extmgr.set_extension_enabled_immediate("omni.example.ui_scene.widget_info", False)
+            for i in range(3):
+                await omni.kit.app.get_app().next_update_async()  # type: ignore
+            extmgr.set_extension_enabled_immediate("omni.example.ui_scene.widget_info", True)
+
     def _on_stage_event(self, event):
         if event.type == int(omni.usd.StageEventType.OPENED):
-            # print("***** omni.usd.StageEventType.OPENED.")
+            print("***** omni.usd.StageEventType.OPENED.")
+            pass
+        elif event.type == int(omni.usd.StageEventType.ASSETS_LOADED):
+            print("***** omni.usd.StageEventType.ASSETS_LOADED.")
+            asyncio.ensure_future(self._disable_enable_widget_ext())
             pass
         elif event.type == int(omni.usd.StageEventType.CLOSING):
-            # print("***** omni.usd.StageEventType.CLOSING.")
+            print("***** omni.usd.StageEventType.CLOSING.")
             pass
         elif event.type == int(omni.usd.StageEventType.SELECTION_CHANGED):
-            # print("***** omni.usd.StageEventType.SELECTION_CHANGED.")
+            print("***** omni.usd.StageEventType.SELECTION_CHANGED.")
             if self._is_external_update:
                 self._is_external_update = False
             else:

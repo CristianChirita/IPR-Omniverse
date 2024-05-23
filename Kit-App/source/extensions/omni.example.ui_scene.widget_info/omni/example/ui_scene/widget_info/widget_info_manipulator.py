@@ -34,7 +34,7 @@ class WidgetInfoManipulator(sc.Manipulator):
         self._root = sc.Transform(visibile=False)
         with self._root:
             with sc.Transform(scale_to=sc.Space.SCREEN):
-                with sc.Transform(transform=sc.Matrix44.get_translation_matrix(0, 100, 0)):
+                with sc.Transform(transform=sc.Matrix44.get_translation_matrix(0, 50, 0)):
                     with sc.Transform(look_at=sc.Transform.LookAt.CAMERA):
                         self._widget = sc.Widget(500, 50, update_policy=sc.Widget.UpdatePolicy.ALWAYS)
                         self._widget.frame.set_build_fn(self.on_build_widgets)
