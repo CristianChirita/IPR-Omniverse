@@ -1,7 +1,6 @@
 from omni.ui import scene as sc
 import omni.ui as ui
 
-from .object_info_manipulator import ObjInfoManipulator
 from .object_info_model import ObjInfoModel
 from .widget_info_manipulator import WidgetInfoManipulator
 
@@ -14,7 +13,8 @@ class ViewportSceneInfo():
             self.scene_view = sc.SceneView()
 
             with self.scene_view.scene:
-                WidgetInfoManipulator(model=ObjInfoModel())
+                if display_widget:
+                    WidgetInfoManipulator(model=ObjInfoModel())
 
             self.viewport_window.viewport_api.add_scene_view(self.scene_view)
 
